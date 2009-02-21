@@ -1,0 +1,11 @@
+*pyc
+*~
+*.db
+*.dat
+.DS_Store
+*gz
+logs
+downloaded-accounts
+*dylib
+*dylib*
+*fasl
