@@ -229,7 +229,11 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         cursor = CursorWrapper(self.connection.cursor())
         return cursor
 
+    def _commit(self):
+        return
+
     def _rollback(self):
+        return
         try:
             BaseDatabaseWrapper._rollback(self)
         except Database.NotSupportedError:
