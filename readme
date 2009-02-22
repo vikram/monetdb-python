@@ -1,0 +1,37 @@
+Get monetdb in source, build and install it.
+Then build and install the MonetDB-clients.
+
+To effectively use with django you'll need to patch
+the MonetSQLdb package, so it doesn't seem to deal with
+booleans. Neither does it give the lastrowid after inserting
+stuff through a cursor.
+
+This backend started it's life as the mySQL backend. I've just
+hacked it to work with monetdb. There are probably still some
+commands in it that are mySQL specific. If you need to change that
+please send me a patch, I'll push it in.
+
+Try it and give me a shout if you find any issues with it.
+
+
+Binary files /Volumes/home/vb/repositories/MonetSQLdb/__init__.pyc and ./__init__.pyc differ
+diff /Volumes/home/vb/repositories/MonetSQLdb/converters.py ./converters.py
+120,125d119
+< def Boolean2Str(x, d):
+<     if x:
+<         return 'TRUE'
+<     else:
+<         return 'FALSE'
+< 
+144d137
+<     types.BooleanType: Boolean2Str,
+Only in /Volumes/home/vb/repositories/MonetSQLdb: converters.pyc
+diff /Volumes/home/vb/repositories/MonetSQLdb/cursors.py ./cursors.py
+38d37
+<         self.lastrowid = 0
+82d80
+< 
+132,134d129
+<         if self._result.lastid()>0:
+<             self.lastrowid = self._result.lastid()
+< 
